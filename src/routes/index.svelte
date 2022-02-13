@@ -1,13 +1,6 @@
 <script>
     import supabase from '$lib/db';
 
-    
-    async function logout() {
-   	 const { error } = await supabase.auth.signOut();
-
-   	 if (error) alert(error.message); // alert if error
-    }
-
     let timetable = {
 	Monday: [
   	{
@@ -178,6 +171,13 @@
   	},
 	],
   };
+    
+    async function logout() {
+   	 const { error } = await supabase.auth.signOut();
+
+   	 if (error) alert(error.message); // alert if error
+    }
+
 </script>
 
 
@@ -186,28 +186,39 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">1</th>
+      <th scope="col">2</th>
+      <th scope="col">3</th>
+      <th scope="col">4</th>
+      <th scope="col">-</th>
+      <th scope="col">5</th>
+      <th scope="col">6</th>
+      <th scope="col">7</th>
+      <th scope="col">8</th>
+      <th scope="col">9</th>
+      <th scope="col">10</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <th scope="row">Monday</th>
+      
     </tr>
     <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
+      <th scope="row">Tuesday</th>
+      
     </tr>
     <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
+      <th scope="row">Wednesday</th>
+      
+    </tr>
+    <tr>
+      <th scope="row">Thursday</th>
+      
+    </tr>
+    <tr>
+      <th scope="row">Friday</th>
+      
     </tr>
   </tbody>
 </table>
