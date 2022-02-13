@@ -183,7 +183,7 @@ import { time_ranges_to_array } from 'svelte/internal';
 
 
 <div class="container">
-<table class="table table-striped text-center">
+<table class="table table-striped text-center table-bordered">
   <thead>
     <tr>
       <th scope="col">#</th>
