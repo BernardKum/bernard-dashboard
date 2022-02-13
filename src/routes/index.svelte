@@ -1,5 +1,6 @@
 <script>
     import supabase from '$lib/db';
+import { time_ranges_to_array } from 'svelte/internal';
 
     let timetable = {
 	Monday: [
@@ -181,8 +182,8 @@
 </script>
 
 
-
-<table class="table">
+<div class="container">
+<table class="table table-striped text-center">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -201,27 +202,48 @@
   </thead>
   <tbody>
     <tr>
-      <th scope="row">Monday</th>
-      
+      <th scope="row" class = "table-primary">MON</th>
+      {#each timetable.Monday as timeSlot}
+      <td colspan={timeSlot.period} class = {timeSlot.style}>
+        <button class = "btn">{timeSlot.name}</button>
+      </td>
+      {/each}
     </tr>
     <tr>
-      <th scope="row">Tuesday</th>
-      
+      <th scope="row" class = "table-primary">TUE</th>
+      {#each timetable.Tuesday as timeSlot}
+      <td colspan={timeSlot.period} class = {timeSlot.style}>
+        <button class = "btn">{timeSlot.name}</button>
+      </td>
+      {/each}
     </tr>
     <tr>
-      <th scope="row">Wednesday</th>
-      
+      <th scope="row" class = "table-primary">WED</th>
+      {#each timetable.Wednesday as timeSlot}
+      <td colspan={timeSlot.period} class = {timeSlot.style}>
+        <button class = "btn">{timeSlot.name}</button>
+      </td>
+      {/each}
     </tr>
     <tr>
-      <th scope="row">Thursday</th>
-      
+      <th scope="row" class = "table-primary">THU</th>
+      {#each timetable.Thursday as timeSlot}
+      <td colspan={timeSlot.period} class = {timeSlot.style}>
+        <button class = "btn">{timeSlot.name}</button>
+      </td>
+      {/each}
     </tr>
     <tr>
-      <th scope="row">Friday</th>
-      
+      <th scope="row" class = "table-primary">FRI</th>
+      {#each timetable.Friday as timeSlot}
+      <td colspan={timeSlot.period} class = {timeSlot.style}>
+        <button class = "btn">{timeSlot.name}</button>
+      </td>
+      {/each}
     </tr>
   </tbody>
 </table>
+</div>
 
 
 
