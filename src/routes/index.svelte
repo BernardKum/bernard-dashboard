@@ -173,6 +173,35 @@ import { time_ranges_to_array } from 'svelte/internal';
 	],
   };
     
+  function addTimeSlot(day){
+	  if(day === "Monday")
+	  timetable.Monday = [
+    ...timetable.Monday,
+    { name: "??", period: 1, style: "" }
+  ];
+  elseif(day === "Tuesday")
+	  timetable.Tuesday = [
+    ...timetable.Tuesday,
+    { name: "??", period: 1, style: "" }
+  ];
+  elseif(day === "Wednesday")
+	  timetable.Wednesday = [
+    ...timetable.Wednesday,
+    { name: "??", period: 1, style: "" }
+  ];
+  elseif(day === "Thursday")
+	  timetable.Thursday = [
+    ...timetable.Thursday,
+    { name: "??", period: 1, style: "" }
+  ];
+  elseif(day === "Friday")
+	  timetable.Friday = [
+    ...timetable.Friday,
+    { name: "??", period: 1, style: "" }
+  ];
+  
+
+  } 
     async function logout() {
    	 const { error } = await supabase.auth.signOut();
 
@@ -181,7 +210,7 @@ import { time_ranges_to_array } from 'svelte/internal';
 
 </script>
 
-
+  
 <div class="container">
 <table class="table table-striped text-center table-bordered">
   <thead>
@@ -208,6 +237,7 @@ import { time_ranges_to_array } from 'svelte/internal';
         <button class = "btn">{timeSlot.name}</button>
       </td>
       {/each}
+	  <td><button class = "btn" on:click={() => addTimeSlot("Monday")}>data-bs-toggle="modal" data-bs-target</button></td>
     </tr>
     <tr>
       <th scope="row" class = "table-primary">TUE</th>
@@ -217,6 +247,7 @@ import { time_ranges_to_array } from 'svelte/internal';
       </td>
       {/each}
     </tr>
+	<td><button class = "btn" on:click={() => addTimeSlot("Tuesday")}>data-bs-toggle="modal" data-bs-target</button></td>
     <tr>
       <th scope="row" class = "table-primary">WED</th>
       {#each timetable.Wednesday as timeSlot}
@@ -224,6 +255,7 @@ import { time_ranges_to_array } from 'svelte/internal';
         <button class = "btn">{timeSlot.name}</button>
       </td>
       {/each}
+	  <td><button class = "btn" on:click={() => addTimeSlot("Wednesday")}>data-bs-toggle="modal" data-bs-target</button></td>
     </tr>
     <tr>
       <th scope="row" class = "table-primary">THU</th>
@@ -232,6 +264,7 @@ import { time_ranges_to_array } from 'svelte/internal';
         <button class = "btn">{timeSlot.name}</button>
       </td>
       {/each}
+	  <td><button class = "btn" on:click={() => addTimeSlot("Thursday")}>data-bs-toggle="modal" data-bs-target</button></td>
     </tr>
     <tr>
       <th scope="row" class = "table-primary">FRI</th>
@@ -240,12 +273,54 @@ import { time_ranges_to_array } from 'svelte/internal';
         <button class = "btn">{timeSlot.name}</button>
       </td>
       {/each}
+	  <td><button class = "btn" on:click={() => addTimeSlot("Friday")}>data-bs-toggle="modal" data-bs-target</button></td>
     </tr>
   </tbody>
 </table>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">Edit Time Slot</h5>
+		  <button type="button" class="btn-cancel" data-bs-dismiss="modal" aria-label="Cancel"></button>
+		</div>
+		<div class="modal-body">
+			<div class = "input-group mb-3">
+				<span class = "input-group-text" id = "basic-addon1">Name</span>
+				<input
+				type = "text"
+				class = "form-control"/>
+			</div>
+			<div class = "input-group mb-3">
+				<span class = "input-group-text" id = "basic-addon1">Period</span>
+				<input
+				type = "text"
+				class = "form-control"/>
+				</div>
+				<label class = "input-group-text" for = "inputGroupSelect01">Style</label>
+				<select class = "form-select" id = "inputGroupSelect01">
+					<option value = "">Default</option>
+					<option value = "table-primary">Blue</option>
+					<option value = "table-success">Green</option>
+					<option value = "table-danger">Red</option>
+					<option value = "table-warning">Yellow</option>
+					<option value = "table-secondary">Gray</option>
+				</select>
+			</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+		  <button type="button" class="btn btn-danger" data-bs-dismiss>Delete</button>
+		  <button type="button" class="btn btn-primary">Save changes</button>
+		</div>
+	  </div>
+	</div>
+  </div>
 
+
+  
 
 <!-- Sign Out -->
 <section class="container px-4 py-3 text-center">
