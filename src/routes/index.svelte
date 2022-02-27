@@ -173,6 +173,20 @@ import { time_ranges_to_array } from 'svelte/internal';
 	],
   };
     
+let curDay;
+let curIndex;
+let curName;
+let curPeriod;
+let curStyle;
+
+function showCurData(day,index,name,period,style){
+	curDay = day;
+	curIndex = index;
+	curName = name;
+	curPeriod = period;
+	curStyle = style;
+}
+
   function addTimeSlot(day){
 	  if(day === "Monday")
 	  timetable.Monday = [
@@ -208,11 +222,14 @@ import { time_ranges_to_array } from 'svelte/internal';
    	 if (error) alert(error.message); // alert if error
     }
 
+
 </script>
 
   
 <div class="container">
-<table class="table table-striped text-center table-bordered">
+<h1>My dashboard</h1>
+	<table class="table table-striped text-center table-bordered caption-top">
+		<caption>School Timetables</caption>
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -232,49 +249,71 @@ import { time_ranges_to_array } from 'svelte/internal';
   <tbody>
     <tr>
       <th scope="row" class = "table-primary">MON</th>
-      {#each timetable.Monday as timeSlot}
+      {#each timetable.Monday as timeSlot, index}
       <td colspan={timeSlot.period} class = {timeSlot.style}>
-        <button class = "btn">{timeSlot.name}</button>
+        <button class = "btn" data-bs-toggle="modal" data-bs-target = "#exampleModal" on:click={() => 
+		showCurData( "Monday", index, timeSlot.name, timeSlot.period, timeSlot.style )}>
+		{timeSlot.name}
+	</button>
       </td>
       {/each}
-	  <td><button class = "btn" on:click={() => addTimeSlot("Monday")}>data-bs-toggle="modal" data-bs-target</button></td>
+	  <td><button class = "btn" on:click={() => addTimeSlot("Monday")}>
+
+	   +</button></td>
     </tr>
     <tr>
       <th scope="row" class = "table-primary">TUE</th>
-      {#each timetable.Tuesday as timeSlot}
+      {#each timetable.Tuesday as timeSlot, index}
       <td colspan={timeSlot.period} class = {timeSlot.style}>
-        <button class = "btn">{timeSlot.name}</button>
+        <button class = "btn" data-bs-toggle="modal" data-bs-target = "#exampleModal" on:click={() => 
+			showCurData( "Tuesday", index, timeSlot.name, timeSlot.period, timeSlot.style )}>
+			{timeSlot.name}
+		</button>
       </td>
       {/each}
+	  <td><button class = "btn" on:click={() => addTimeSlot("Tuesday")}>+</button></td>
     </tr>
-	<td><button class = "btn" on:click={() => addTimeSlot("Tuesday")}>data-bs-toggle="modal" data-bs-target</button></td>
+	
     <tr>
+		
       <th scope="row" class = "table-primary">WED</th>
-      {#each timetable.Wednesday as timeSlot}
+      {#each timetable.Wednesday as timeSlot, index}
       <td colspan={timeSlot.period} class = {timeSlot.style}>
-        <button class = "btn">{timeSlot.name}</button>
+        <button class = "btn" data-bs-toggle="modal" data-bs-target = "#exampleModal" on:click={() => 
+			showCurData( "Monday", index, timeSlot.name, timeSlot.period, timeSlot.style )}>
+			{timeSlot.name}
+		</button>
       </td>
       {/each}
-	  <td><button class = "btn" on:click={() => addTimeSlot("Wednesday")}>data-bs-toggle="modal" data-bs-target</button></td>
+	  <td><button class = "btn" on:click={() => addTimeSlot("Wednesday")} >+</button></td>
     </tr>
     <tr>
       <th scope="row" class = "table-primary">THU</th>
-      {#each timetable.Thursday as timeSlot}
+      {#each timetable.Thursday as timeSlot, index}
       <td colspan={timeSlot.period} class = {timeSlot.style}>
-        <button class = "btn">{timeSlot.name}</button>
+        <button class = "btn" data-bs-toggle="modal" data-bs-target = "#exampleModal" on:click={() => 
+			showCurData( "Thursday", index, timeSlot.name, timeSlot.period, timeSlot.style )}
+			>
+			{timeSlot.name}
+		</button>
       </td>
       {/each}
-	  <td><button class = "btn" on:click={() => addTimeSlot("Thursday")}>data-bs-toggle="modal" data-bs-target</button></td>
+	  <td><button class = "btn" on:click={() => addTimeSlot("Thursday")} >+</button></td>
     </tr>
     <tr>
       <th scope="row" class = "table-primary">FRI</th>
-      {#each timetable.Friday as timeSlot}
+      {#each timetable.Friday as timeSlot, index}
       <td colspan={timeSlot.period} class = {timeSlot.style}>
-        <button class = "btn">{timeSlot.name}</button>
+		<button class = "btn" data-bs-toggle="modal" data-bs-target = "#exampleModal" on:click={() => 
+			showCurData( "Friday", index, timeSlot.name, timeSlot.period, timeSlot.style )}
+			>
+		{timeSlot.name}
+	</button>
       </td>
       {/each}
-	  <td><button class = "btn" on:click={() => addTimeSlot("Friday")}>data-bs-toggle="modal" data-bs-target</button></td>
+	  <td><button class = "btn" on:click={() => addTimeSlot("Friday")} >+</button></td>
     </tr>
+	
   </tbody>
 </table>
 </div>
@@ -292,16 +331,22 @@ import { time_ranges_to_array } from 'svelte/internal';
 				<span class = "input-group-text" id = "basic-addon1">Name</span>
 				<input
 				type = "text"
-				class = "form-control"/>
+				class = "form-control"
+				aria-label = "Username"
+				aria-describedby = "basic-addon1"
+				bind:value = {curName}/>
 			</div>
 			<div class = "input-group mb-3">
 				<span class = "input-group-text" id = "basic-addon1">Period</span>
 				<input
 				type = "text"
-				class = "form-control"/>
-				</div>
+				class = "form-control"
+				aria-label = "Username"
+				aria-describedby = "basic-addon1"
+				bind:value = {curPeriod}/>
+			</div>
 				<label class = "input-group-text" for = "inputGroupSelect01">Style</label>
-				<select class = "form-select" id = "inputGroupSelect01">
+				<select class = "form-select" id = "inputGroupSelect01" bind:value = {curStyle}>
 					<option value = "">Default</option>
 					<option value = "table-primary">Blue</option>
 					<option value = "table-success">Green</option>
