@@ -187,6 +187,8 @@ function showCurData(day,index,name,period,style){
 	curStyle = style;
 }
 
+
+
   function addTimeSlot(day){
 	  if(day === "Monday")
 	  timetable.Monday = [
@@ -215,7 +217,20 @@ function showCurData(day,index,name,period,style){
   ];
   
 
+
   } 
+
+  function deleteTimeSlot(day, index){
+	  timetable[day].splice(index, 1);
+	  timetable = timetable;
+  }
+
+  function setTimeSlot(day, index, newName, newPeriod, newStyle){
+	  timetable[day][index].name = newName;
+	  timetable[day][index].period = newPeriod;
+	  timetable[day][index].style = newStyle;
+
+  }
     async function logout() {
    	 const { error } = await supabase.auth.signOut();
 
@@ -357,8 +372,10 @@ function showCurData(day,index,name,period,style){
 			</div>
 		<div class="modal-footer">
 		  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-		  <button type="button" class="btn btn-danger" data-bs-dismiss>Delete</button>
-		  <button type="button" class="btn btn-primary">Save changes</button>
+		  <button type="button" class="btn btn-danger" data-bs-dismiss = "modal"
+		  on:click={()=>{deleteTimeSlot(curDay, curIndex)}}>Delete</button>
+		  <button type="button" class="btn btn-primary" data-bs-dismiss = "modal"
+		  on:click={()=>{setTimeSlot(curDay, curIndex, curName, curPeriod, curStyle)}}>Save changes</button>
 		</div>
 	  </div>
 	</div>
