@@ -223,13 +223,14 @@ function showCurData(day,index,name,period,style){
   function deleteTimeSlot(day, index){
 	  timetable[day].splice(index, 1);
 	  timetable = timetable;
+	  (saveEntry)
   }
 
   function setTimeSlot(day, index, newName, newPeriod, newStyle){
 	  timetable[day][index].name = newName;
 	  timetable[day][index].period = newPeriod;
 	  timetable[day][index].style = newStyle;
-
+	  (saveEntry)
   }
     async function logout() {
    	 const { error } = await supabase.auth.signOut();
@@ -237,6 +238,16 @@ function showCurData(day,index,name,period,style){
    	 if (error) alert(error.message); // alert if error
     }
 
+	async function saveEntry() {
+  const { error } = await supabase.from("studentEntries").upsert(
+    {
+      user_id: supabase.auth.user().id,
+      timetable: timetable,
+    },
+    { onConflict: "user_id" }
+  );
+  if (error) alert(error.message);
+}
 
 </script>
 
