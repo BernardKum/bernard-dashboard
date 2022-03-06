@@ -223,14 +223,14 @@ function showCurData(day,index,name,period,style){
   function deleteTimeSlot(day, index){
 	  timetable[day].splice(index, 1);
 	  timetable = timetable;
-	  (saveEntry)
+	  saveEntry()
   }
 
   function setTimeSlot(day, index, newName, newPeriod, newStyle){
 	  timetable[day][index].name = newName;
 	  timetable[day][index].period = newPeriod;
 	  timetable[day][index].style = newStyle;
-	  (saveEntry)
+	  saveEntry()
   }
     async function logout() {
    	 const { error } = await supabase.auth.signOut();
